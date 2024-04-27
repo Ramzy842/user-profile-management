@@ -51,20 +51,6 @@ const userAlreadyInDB = (email) => {
     return user ? true : false;
 };
 
-/* const declareMissingInfo = (bodyObj, num, next) => {
-    if (num === 1) {
-        if (!bodyObj.name && !bodyObj.email)
-            return { error: "Please enter your name and email." };
-        else if (!bodyObj.name) return { error: "name required." };
-        else if (!bodyObj.email) return { error: "email required." };
-    } else if (num === 2) {
-        if (!bodyObj.email || !bodyObj.password)
-            return { error: "Please enter your email and password." };
-        else if (!bodyObj.email) return { error: "email required." };
-        else if (!bodyObj.password) return { error: "password required." };
-    }
-};
- */
 
 const credentialsChecker = (req, res, next) => {
     const body = req.body;
