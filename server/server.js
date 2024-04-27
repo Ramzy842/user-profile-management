@@ -36,11 +36,57 @@ let users = [
     },
 ];
 
+// ------------------------------ HELPER FUNCTIONS -------------------------------- //
+
 const generateId = () => {
     let maxId = 0;
     if (users.length > 0) maxId = Math.max(...users.map((user) => user.id)) + 1;
     return maxId;
 };
+
+const userAlreadyInDB = (email) => {
+    const user = users.find(
+        (user) => user.email.toLowerCase() === email.toLowerCase()
+    );
+    return user ? true : false;
+};
+
+/* const declareMissingInfo = (bodyObj, num, next) => {
+    if (num === 1) {
+        if (!bodyObj.name && !bodyObj.email)
+            return { error: "Please enter your name and email." };
+        else if (!bodyObj.name) return { error: "name required." };
+        else if (!bodyObj.email) return { error: "email required." };
+    } else if (num === 2) {
+        if (!bodyObj.email || !bodyObj.password)
+            return { error: "Please enter your email and password." };
+        else if (!bodyObj.email) return { error: "email required." };
+        else if (!bodyObj.password) return { error: "password required." };
+    }
+};
+ */
+
+const credentialsChecker = (req, res, next) => {
+    const body = req.body;
+    if (!body.name && !body.email)
+        return res.json({ error: "Please enter your name and email." });
+    else if (!body.name) return res.json({ error: "name required." });
+    else if (!body.email) return res.json({ error: "email required." });
+    else if (userAlreadyInDB(body.email))
+        return res.json({ error: "A user with this email already exists" });
+    next();
+};
+
+const loginChecker = (req, res, next) => {
+    const body = req.body;
+    if (!body.email && !body.password)
+        return res.json({ error: "Please enter your email and password." });
+    else if (!body.email) return res.json({ error: "email required." });
+    else if (!body.password) return res.json({ error: "password required." });
+    next();
+};
+
+// -------------------------------------------------------------------------------- //
 
 app.get("/api/users", (req, res) => {
     res.status(200).json(users);
@@ -53,10 +99,8 @@ app.get("/api/users/:id", (req, res) => {
     res.status(200).json(user);
 });
 
-app.post("/api/users", (req, res) => {
+app.post("/api/users/register", credentialsChecker, (req, res) => {
     const body = req.body;
-    if (!body.name || !body.email)
-        res.json({ error: "Please enter name and email" }).end();
     const newUser = {
         id: generateId(),
         name: body.name,
@@ -69,6 +113,10 @@ app.post("/api/users", (req, res) => {
     };
     users = users.concat(newUser);
     res.json(newUser);
+});
+
+app.post("/api/users/login", loginChecker, (req, res) => {
+    res.json({message: "Success"});
 });
 
 app.use((req, res, next) => {
