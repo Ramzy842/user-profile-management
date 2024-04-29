@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Info from "../components/Info";
 import ColorPicker from "../components/ColorPicker";
 import FavColor from "../components/FavColor";
+import MobileMenu from "../components/MobileMenu";
 
 const Home = () => {
+    const [showMenu, setShowMenu] = useState(false);
+    const handleMenu = () => {
+        setShowMenu(!showMenu);
+    };
     return (
-        <div className="min-h-screen bg-light-cyan p-2 w-full">
+        <div className="min-h-screen bg-light-cyan p-2 w-full relative">
             <div className="max-w-lg mx-auto">
                 <div className="flex justify-between items-start mb-6">
                     <div className="pt-2 w-1/2">
@@ -22,12 +27,14 @@ const Home = () => {
                             src="./assets/menu.svg"
                             className="mb-2 w-12 h-16 cursor-pointer"
                             alt="menu"
+                            onClick={handleMenu}
                         />
                         <div className="h-32 w-32 bg-cyan-500  drop-shadow-lg rounded-full mr-2"></div>
                     </div>
                 </div>
                 <Info />
                 <FavColor />
+                {showMenu && <MobileMenu setShowMenu={setShowMenu} />}
             </div>
         </div>
     );
