@@ -8,6 +8,8 @@ export default {
     extend: {
       colors: {
         'light-cyan': '#D9E7EC',
+        'form-input': "#312C2C",
+        'logo' : "#C9D1D2"
       },
     },
   },
