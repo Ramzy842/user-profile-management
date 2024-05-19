@@ -10,7 +10,8 @@ export default {
         'light-cyan': '#D9E7EC',
         'form-input': "#312C2C",
         'logo' : "#C9D1D2",
-        "green-cyan" : "#2E7B80"
+        "green-cyan" : "#2E7B80",
+        "profile-input": "#F8FFFF",
       },
     },
   },

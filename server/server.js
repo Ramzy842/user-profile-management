@@ -101,6 +101,12 @@ app.post("/api/users/register", credentialsChecker, (req, res) => {
     res.json(newUser);
 });
 
+app.delete("/api/users/:id", (req, res) => {
+    const id = Number(req.params.id);
+    users = users.filter(user => user.id !== id);
+    res.json(users);
+})
+
 app.post("/api/users/login", loginChecker, (req, res) => {
     res.json({message: "Success"});
 });

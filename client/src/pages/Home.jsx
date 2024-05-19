@@ -3,6 +3,7 @@ import Info from "../components/Info";
 import ColorPicker from "../components/ColorPicker";
 import FavColor from "../components/FavColor";
 import MobileMenu from "../components/MobileMenu";
+import CurrentTime from "../components/CurrentTime";
 
 const Home = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -10,7 +11,7 @@ const Home = () => {
         setShowMenu(!showMenu);
     };
     return (
-        <div className="min-h-screen bg-light-cyan p-2 w-full relative">
+        <div className="min-h-screen bg-light-cyan px-4 py-2 w-full relative">
             <div className="max-w-lg mx-auto">
                 <div className="flex justify-between items-start mb-6">
                     <div className="pt-2 w-1/2">
@@ -29,12 +30,13 @@ const Home = () => {
                             alt="menu"
                             onClick={handleMenu}
                         />
-                        <div className="h-32 w-32 bg-cyan-500  drop-shadow-lg rounded-full mr-2"></div>
+                        <div className="h-32 w-32 bg-cyan-500  drop-shadow-lg rounded-full "></div>
                     </div>
                 </div>
                 <Info />
                 <FavColor />
                 {showMenu && <MobileMenu setShowMenu={setShowMenu} />}
+                <CurrentTime />
             </div>
         </div>
     );

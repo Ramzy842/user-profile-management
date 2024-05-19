@@ -27,7 +27,7 @@ const Login = () => {
                 </p>
                 <div className="w-full flex justify-center items-center flex-col">
                     <Button
-                        bgColor="bg-blue-600"
+                        bgColor="bg-blue-700"
                         textColor="white"
                         text="Sign in"
                     />
